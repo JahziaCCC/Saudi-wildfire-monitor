@@ -4,7 +4,7 @@ on:
   schedule:
     # يعمل تلقائياً يومياً الساعة 5:00 صباحاً بتوقيت غرينتش (8:00 صباحاً بتوقيت السعودية)
     - cron: '0 5 * * *'
-  workflow_dispatch: # يتيح لك إمكانية التشغيل اليدوي بزر بضغطة واحدة من GitHub
+  workflow_dispatch:
 
 jobs:
   run-wildfire-script:
@@ -22,11 +22,11 @@ jobs:
       - name: Install System Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libgdal-dev libproj-dev libgeos-dev libudunits2-dev libcurl4-openssl-dev
+          sudo apt-get install -y libgdal-dev libproj-dev libgeos-dev libudunits2-dev libcurl4-openssl-dev libuv1-dev libssl-dev libxml2-dev
 
       - name: Install Required R Packages
         run: |
-          Rscript -e 'install.packages(c("sf", "leaflet", "dplyr", "readr", "httr2", "jsonlite", "htmlwidgets"), repos="https://cloud.r-project.org")'
+          Rscript -e 'install.packages(c("sf", "leaflet", "dplyr", "readr", "httr2", "jsonlite", "htmlwidgets", "fs"), repos="https://cloud.r-project.org")'
 
       - name: Execute Wildfire Monitoring Script
         env:
